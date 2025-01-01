@@ -30,7 +30,7 @@ Once the `results.txt` is generated, this script uploads the file to a Discord W
 
 1. **Clone this repository**:
    ```bash
-   git clone https://github.com/YOUR_USERNAME/Windows-Exfil-BadUsb.git
+   git clone https://github.com/Retr0-0Sec/Windows-Exfil-BadUsb
 2. **Open the EXFIL.txt script and replace the placeholder with your Discord Webhook URL**:
  
   > $webhookUrl = "YOUR_DISCORD_WEBHOOK_URL"
